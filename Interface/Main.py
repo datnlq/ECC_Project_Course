@@ -1,3 +1,4 @@
+from typing import Optional
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 from PyQt5 import uic
@@ -24,9 +25,16 @@ class LogIn(qtw.QWidget):
 
         #Cái hàm event ở dưới đây nha
     def checkPass(self):
-        qtw.QMessageBox.warning(self,"Imformation", "Log in successful!")     
+        ret = qtw.QMessageBox.warning(self,"Test", "You are teacher?", qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+        if ret == qtw.QMessageBox.Yes:
+            teacher = Teacher()
+            teacher.show()
+        if ret == qtw.QMessageBox.No:
+            student= Student()
+            student.show()
+        
 
-
+        
 
     
 #Cái form giao diện teacher ở đây
@@ -209,6 +217,7 @@ app = qtw.QApplication([])
 #Chỗ phải thay đổi mới xem form muốn xem đc. Tại vì phải set điều kiển nhảy form cho button Log In ở form LogIn, sau đó dùng stack widgets để nhảy widget.
 #Mấy cái table chưa có set read
 #Mệt quá nên đi ngủ hoi
-login = Teacher()
+
+login = LogIn()
 login.show()
 app.exec_()
