@@ -24,7 +24,8 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>18</pointsize>
+    <family>Segoe UI</family>
+    <pointsize>12</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -41,8 +42,8 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>30</y>
+     <x>360</x>
+     <y>10</y>
      <width>10</width>
      <height>841</height>
     </rect>
@@ -54,15 +55,16 @@
   <widget class="QGroupBox" name="groupboxProfile">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>260</y>
-     <width>311</width>
-     <height>351</height>
+     <x>40</x>
+     <y>250</y>
+     <width>291</width>
+     <height>371</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>18</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>12</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -88,7 +90,7 @@
     <property name="font">
      <font>
       <family>MS Shell Dlg 2</family>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -112,7 +114,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -146,11 +148,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>anv@gm.uit.edu.vn</string>
+     <string>anv@uit.edu.vn</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelFaculty">
@@ -164,7 +166,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -182,7 +184,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -200,11 +202,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>GV01</string>
+     <string>MSGV</string>
     </property>
    </widget>
    <zorder>label_2</zorder>
@@ -218,15 +220,16 @@
   <widget class="QPushButton" name="buttonLogout">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>660</y>
-     <width>221</width>
-     <height>71</height>
+     <x>100</x>
+     <y>640</y>
+     <width>171</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>18</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -255,9 +258,9 @@
   <widget class="QLineEdit" name="lineSearch">
    <property name="geometry">
     <rect>
-     <x>1330</x>
-     <y>30</y>
-     <width>281</width>
+     <x>450</x>
+     <y>40</y>
+     <width>191</width>
      <height>41</height>
     </rect>
    </property>
@@ -272,15 +275,18 @@
     <string notr="true">background-color: white; border-style: solid; border-width: 2px; border-radius: 10px; border-color: rgb(18,153,175); padding: 4px; color: #474747;</string>
    </property>
    <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
     <string>Tìm kiếm</string>
    </property>
   </widget>
   <widget class="QLabel" name="buttonSearch">
    <property name="geometry">
     <rect>
-     <x>1270</x>
-     <y>30</y>
-     <width>51</width>
+     <x>400</x>
+     <y>40</y>
+     <width>41</width>
      <height>41</height>
     </rect>
    </property>
@@ -319,15 +325,16 @@
   <widget class="QComboBox" name="selectYear">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>30</y>
-     <width>221</width>
+     <x>420</x>
+     <y>160</y>
+     <width>211</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -352,39 +359,19 @@ color: black</string>
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="buttonListClass">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>20</y>
-     <width>251</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(18,153,175); border-style: outset; border-width: 2px; border-radius: 15px; border-color: white; padding: 4px; color:white</string>
-   </property>
-   <property name="text">
-    <string>XEM DANH SÁCH LỚP</string>
-   </property>
-  </widget>
   <widget class="QComboBox" name="selectSemester">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>30</y>
-     <width>221</width>
+     <x>420</x>
+     <y>110</y>
+     <width>211</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -412,15 +399,16 @@ color: black</string>
   <widget class="QGroupBox" name="groupListClass">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>130</y>
-     <width>251</width>
-     <height>221</height>
+     <x>390</x>
+     <y>230</y>
+     <width>261</width>
+     <height>551</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>12</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -435,22 +423,31 @@ color: black</string>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
    <widget class="QListWidget" name="listClass">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>40</y>
       <width>231</width>
-      <height>171</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>16</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white; border-style: solid; border-width: 0px; color: #474747;</string>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
     </property>
     <item>
      <property name="text">
@@ -472,16 +469,16 @@ color: black</string>
   <widget class="QTableWidget" name="tableClass">
    <property name="geometry">
     <rect>
-     <x>710</x>
-     <y>130</y>
-     <width>961</width>
-     <height>731</height>
+     <x>680</x>
+     <y>160</y>
+     <width>1001</width>
+     <height>691</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Times New Roman</family>
-     <pointsize>14</pointsize>
+     <family>Segoe UI</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -490,14 +487,20 @@ background-color: white; border-color: red
 
 </string>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
    <column>
     <property name="text">
      <string>MSSV</string>
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -510,9 +513,12 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
    <column>
@@ -521,9 +527,12 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
    <column>
@@ -532,8 +541,8 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -546,8 +555,8 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -560,8 +569,8 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -574,8 +583,8 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -588,8 +597,8 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="textAlignment">
@@ -602,287 +611,212 @@ background-color: white; border-color: red
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>16</pointsize>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
   </widget>
-  <widget class="QGroupBox" name="groupListClass_2">
+  <widget class="QPushButton" name="buttonEdit">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>400</y>
-     <width>271</width>
-     <height>261</height>
+     <x>420</x>
+     <y>800</y>
+     <width>201</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 85, 127); border-style: outset; border-width: 2px; border-radius: 15px; border-color: white; padding: 4px; color:white</string>
+   </property>
+   <property name="text">
+    <string>SỬA ĐIỂM</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>120</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black
+</string>
+   </property>
+   <property name="text">
+    <string>ID lớp:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelIDClass">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>120</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: red
+</string>
+   </property>
+   <property name="text">
+    <string>NT219.L21.ANTT</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelNameSubject">
+   <property name="geometry">
+    <rect>
+     <x>1180</x>
+     <y>120</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: red
+</string>
+   </property>
+   <property name="text">
+    <string>Mật mã học</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>120</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black
+</string>
+   </property>
+   <property name="text">
+    <string>Môn học:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelNumber">
+   <property name="geometry">
+    <rect>
+     <x>1610</x>
+     <y>120</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: red
+</string>
+   </property>
+   <property name="text">
+    <string>70</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>1520</x>
+     <y>120</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black
+</string>
+   </property>
+   <property name="text">
+    <string>Sĩ số:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>50</y>
+     <width>401</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(18,153,175);
+    <string notr="true">color:rgb(41, 96, 145)
 </string>
    </property>
-   <property name="title">
-    <string>THÔNG TIN LỚP HỌC</string>
+   <property name="text">
+    <string>BẢNG ĐIỂM SINH VIÊN</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
-   </property>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>61</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: black
-</string>
-    </property>
-    <property name="text">
-     <string>ID lớp:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: black
-</string>
-    </property>
-    <property name="text">
-     <string>Môn học: </string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>120</y>
-      <width>91</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: black
-</string>
-    </property>
-    <property name="text">
-     <string>Số tín chỉ:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>160</y>
-      <width>91</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: black
-</string>
-    </property>
-    <property name="text">
-     <string>Sĩ số:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>200</y>
-      <width>91</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: black
-</string>
-    </property>
-    <property name="text">
-     <string>Tiết:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelIDClass">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>40</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red
-</string>
-    </property>
-    <property name="text">
-     <string>NT219.L21.ANTT</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelNameSubject">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>80</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red
-</string>
-    </property>
-    <property name="text">
-     <string>Mật mã học</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelMoney">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>120</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red
-</string>
-    </property>
-    <property name="text">
-     <string>4</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelNumber">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>160</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red
-</string>
-    </property>
-    <property name="text">
-     <string>70</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelTime">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>200</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red
-</string>
-    </property>
-    <property name="text">
-     <string>9, 10</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="buttonEdit">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>720</y>
-     <width>191</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(18,153,175); border-style: outset; border-width: 2px; border-radius: 15px; border-color: white; padding: 4px; color:white</string>
-   </property>
-   <property name="text">
-    <string>SỬA ĐIỂM</string>
    </property>
   </widget>
   <zorder>buttonSearch</zorder>
@@ -893,12 +827,17 @@ background-color: white; border-color: red
   <zorder>lineSearch</zorder>
   <zorder>label</zorder>
   <zorder>selectYear</zorder>
-  <zorder>buttonListClass</zorder>
   <zorder>selectSemester</zorder>
   <zorder>groupListClass</zorder>
   <zorder>tableClass</zorder>
-  <zorder>groupListClass_2</zorder>
   <zorder>buttonEdit</zorder>
+  <zorder>label_4</zorder>
+  <zorder>labelIDClass</zorder>
+  <zorder>labelNameSubject</zorder>
+  <zorder>label_5</zorder>
+  <zorder>labelNumber</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_6</zorder>
  </widget>
  <resources/>
  <connections/>

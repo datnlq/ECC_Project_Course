@@ -218,6 +218,6 @@ app = qtw.QApplication([])
 #Mấy cái table chưa có set read
 #Mệt quá nên đi ngủ hoi
 
-login = LogIn()
+login = Teacher()
 login.show()
 app.exec_()
