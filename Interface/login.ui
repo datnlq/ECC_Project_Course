@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>650</height>
+    <width>1700</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>650</height>
+    <width>1700</width>
+    <height>900</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1000</width>
-    <height>650</height>
+    <width>1700</width>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -36,14 +36,13 @@
     <normaloff>uit.ico</normaloff>uit.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:white
-</string>
+   <string notr="true">background-color:white;</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>110</y>
+     <x>430</x>
+     <y>230</y>
      <width>171</width>
      <height>141</height>
     </rect>
@@ -58,8 +57,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>65</x>
-     <y>315</y>
+     <x>295</x>
+     <y>435</y>
      <width>31</width>
      <height>41</height>
     </rect>
@@ -74,8 +73,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>390</y>
+     <x>290</x>
+     <y>510</y>
      <width>31</width>
      <height>41</height>
     </rect>
@@ -90,15 +89,15 @@
   <widget class="QLineEdit" name="lineUsername">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>310</y>
+     <x>340</x>
+     <y>430</y>
      <width>350</width>
      <height>50</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -111,15 +110,15 @@
   <widget class="QLineEdit" name="linePassword">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>390</y>
+     <x>340</x>
+     <y>510</y>
      <width>350</width>
      <height>50</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -135,17 +134,15 @@
   <widget class="QPushButton" name="buttonLogin">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>470</y>
-     <width>151</width>
-     <height>61</height>
+     <x>490</x>
+     <y>600</y>
+     <width>201</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>16</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -160,8 +157,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
-     <height>50</height>
+     <width>1700</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -171,55 +168,31 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="brandname">
+  <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>860</x>
-     <y>620</y>
-     <width>141</width>
+     <x>1510</x>
+     <y>850</y>
+     <width>171</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>16</pointsize>
     </font>
-   </property>
-   <property name="tabletTracking">
-    <bool>false</bool>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>0</number>
    </property>
    <property name="text">
     <string>Made by 54010n</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::PlainText</enum>
-   </property>
-   <property name="scaledContents">
-    <bool>false</bool>
-   </property>
-   <property name="wordWrap">
-    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>150</y>
-     <width>421</width>
-     <height>391</height>
+     <x>920</x>
+     <y>180</y>
+     <width>721</width>
+     <height>591</height>
     </rect>
    </property>
    <property name="text">

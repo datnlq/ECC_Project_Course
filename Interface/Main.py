@@ -1,21 +1,85 @@
-from typing import Optional
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 from PyQt5 import uic
 import PyQt5.QtCore as qtc
+import sqlite3
+from sqlite3 import Error
+import hashlib as h
 import sys
 
-#Này là cái class cho cái form 
+#region Database Server
+class Server():
+    def __init__(self):
+        super().__init__()
+        try:
+            self.conn = sqlite3.connect("ECCapp.db")
+            self.cur = self.conn.cursor()
+        # print(sqlite3.version)
+        except Error as e:
+            print(e)
+
+    def selectStudent(self, username):
+        self.cur.execute("SELECT * FROM STUDENT WHERE StudentID=?", (username,))
+
+        row = self.cur.fetchone()
+        return row
+
+    def selectTeacher(self, username):
+        self.cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", (username,))
+        row = self.cur.fetchone()
+        return row
+
+    def checkSign(self, passCheck, passInput):
+        print(passInput)
+        hash_passInput = h.sha1(bytes(passInput, 'utf-8')).hexdigest()
+        print(hash_passInput)
+        hash_passCheck = h.sha1(bytes(passCheck, 'utf-8')).hexdigest()
+        print(hash_passCheck)
+        
+        if(hash_passCheck == hash_passInput):
+            return True
+        else:
+            return False
+    
+    def checkUserPass(self,username, passInput):
+        infor = self.selectStudent(username)
+        if(infor == None):
+            infor = self.selectTeacher(username)
+            if (infor == None):
+                return 0
+            else:
+                if (self.checkSign(infor[6], passInput) == True):
+                    self.checkSign(infor[6], passInput)
+                    return 1
+                else:
+                    return 0
+        else:
+            if (self.checkSign(infor[7], passInput) == True):
+                self.checkSign(infor[7], passInput)
+                return 2
+            else:
+                return 0
+#endregion Database Server
+
+
+class ReadOnlyDelegate(qtw.QStyledItemDelegate):
+    def createEditor(self, parent, option, index):
+        return
+
+
+#region LogIn form
 class LogIn(qtw.QWidget):
     def __init__(self):
         super().__init__()
         #Load giao diện
         uic.loadUi("login.ui", self)
+        
 
         #Các thành phần cần quan tâm thì t đặt ra ở đây. 
         #lineUsername là cái mà nhập username đó 
         #linePassword là nhập gì thì bít òy đó =))
         #buttonLogin là cái button mà nhấn dô thì kiểm tra pass.
+        self.setStyleSheet("background-color: white;")
         buttonLogin =  self.findChild(qtw.QPushButton, 'buttonLogin')
         lineUsername = self.findChild(qtw.QLineEdit, 'lineUsername')
         linePassword = self.findChild(qtw.QLineEdit, 'linePassword')
@@ -23,21 +87,26 @@ class LogIn(qtw.QWidget):
         #Muốn tạo event cho button thì như này nè!
         buttonLogin.clicked.connect(self.checkPass)
 
-        #Cái hàm event ở dưới đây nha
     def checkPass(self):
-        ret = qtw.QMessageBox.warning(self,"Test", "You are teacher?", qtw.QMessageBox.Yes | qtw.QMessageBox.No)
-        if ret == qtw.QMessageBox.Yes:
+        server = Server()
+        username = self.lineUsername.text()
+        passInput = self.linePassword.text()
+
+        check = server.checkUserPass(username, passInput)
+        if check == 0:
+            msg = qtw.QMessageBox.about(self,"Notification", "Username or password is incorrect!")
+        elif check == 1:
             teacher = Teacher()
-            teacher.show()
-        if ret == qtw.QMessageBox.No:
-            student= Student()
-            student.show()
-        
+            stack.addWidget(teacher)
+            stack.setCurrentIndex(stack.currentIndex() + 1)
+        else:
+            student = Student()
+            stack.addWidget(student)
+            stack.setCurrentIndex(stack.currentIndex() + 1)
+#endregion LogIn form
 
-        
 
-    
-#Cái form giao diện teacher ở đây
+#region Teacher Form
 class Teacher(qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -60,6 +129,9 @@ class Teacher(qtw.QWidget):
         #selectYear là cái comboBox chọn năm học
         #buttonListClass là cái nút xem danh sách lớp học. OK mann!
         buttonLogout = self.findChild(qtw.QPushButton, 'buttonLogout')
+        buttonLogout.clicked.connect(self.LogOut)
+
+
         selectSemester = self.findChild(qtw.QComboBox, 'selectSemester')
         selectYear = self.findChild(qtw.QComboBox, 'selectYear')
         buttonListClass = self.findChild(qtw.QPushButton, 'buttonListClass')
@@ -86,8 +158,8 @@ class Teacher(qtw.QWidget):
         tableClass = self.findChild(qtw.QTableWidget, 'tableClass')
         tableClass.setColumnWidth(1, 150)
         tableClass.setColumnWidth(8, 110)
-        self.loadData()
 
+        self.loadData()
 
     def loadData(self):
         student = [ResultStudent("19522307", "Nguyễn Thị Thu", "Nữ", 8, 8, 8, 8, 8), ResultStudent("19522306", "Nguyễn Văn Bé", "Nam", 9, 9, 9, 9, 9),]
@@ -104,9 +176,16 @@ class Teacher(qtw.QWidget):
             self.tableClass.setItem(row, 7, qtw.QTableWidgetItem(str(person.averagePoint)))
             row = row + 1
 
+    def LogOut(self):
+        ret = qtw.QMessageBox.warning(self,"Test", "Are you sure?", qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+        if ret == qtw.QMessageBox.Yes:
+            login = LogIn()
+            stack.addWidget(login)
+            stack.setCurrentIndex(stack.currentIndex() + 1)
+#endregion Teacher Form
 
 
-#Form student ở đây
+#region Student Form
 class Student(qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -127,6 +206,9 @@ class Student(qtw.QWidget):
 
         #button Log Out, Combo Box chọn học kỳ, năm học
         buttonLogout = self.findChild(qtw.QPushButton, 'buttonLogout')
+        buttonLogout.clicked.connect(self.LogOut)
+
+
         selectSemester = self.findChild(qtw.QComboBox, 'selectSemester')
         selectYear = self.findChild(qtw.QComboBox, 'selectYear')
         #button Xem kết quả
@@ -148,6 +230,10 @@ class Student(qtw.QWidget):
         tableResult.setColumnWidth(8, 110)
         self.loadData()
 
+        delegate = ReadOnlyDelegate(self)
+        for i in range (tableResult.columnCount()):
+            tableResult.setItemDelegateForColumn(i, delegate)
+
     def loadData(self):
         subject = [ResultSubject("NT219.L21.ANTT", "Mật mã học", 4, 8, 8, 8, 8, 8), ResultSubject("IT007.L21", "Hệ điều hành", 4, 9, 9, 9, 9, 9),]
         row = 0
@@ -163,7 +249,16 @@ class Student(qtw.QWidget):
             self.tableResult.setItem(row, 7, qtw.QTableWidgetItem(str(sub.averagePoint)))
             row = row + 1
 
+    def LogOut(self):
+        ret = qtw.QMessageBox.warning(self,"Test", "Are you sure?", qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+        if ret == qtw.QMessageBox.Yes:
+            login = LogIn()
+            stack.addWidget(login)
+            stack.setCurrentIndex(stack.currentIndex() + 1)
+#endregion Student Form
 
+
+#region Class TeacherProfile, StudentProfile, ResultStudent, ResultSubject
 #Class này dùng để làm profile của teacher
 class TeacherProfile():
     def __init__(self, ID, name, sex, faculty, phone, mail):
@@ -211,13 +306,16 @@ class ResultSubject():
         self.labPoint = labPoint
         self.endPoint = endPoint
         self.averagePoint = averagePoint
-
+#endregion Class TeacherProfile, StudentProfile, ResultStudent, ResultSubject
 
 app = qtw.QApplication([])
-#Chỗ phải thay đổi mới xem form muốn xem đc. Tại vì phải set điều kiển nhảy form cho button Log In ở form LogIn, sau đó dùng stack widgets để nhảy widget.
-#Mấy cái table chưa có set read
-#Mệt quá nên đi ngủ hoi
 
-login = Teacher()
-login.show()
+stack = qtw.QStackedWidget()
+login = LogIn()
+stack.addWidget(login)
+stack.setStyleSheet("background-color: white;")
+stack.setWindowIcon(qtg.QIcon('uit.ico'))
+stack.setWindowTitle("EEC Application")
+stack.move(50, 50)
+stack.show()
 app.exec_()
