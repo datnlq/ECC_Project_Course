@@ -255,51 +255,6 @@
     <pixmap>decorate.png</pixmap>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineSearch">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>40</y>
-     <width>191</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS Shell Dlg 2</family>
-     <pointsize>12</pointsize>
-     <italic>false</italic>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: white; border-style: solid; border-width: 2px; border-radius: 10px; border-color: rgb(18,153,175); padding: 4px; color: #474747;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string>Tìm kiếm</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="buttonSearch">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>40</y>
-     <width>41</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>lookup.png</pixmap>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -326,7 +281,7 @@
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>170</y>
+     <y>100</y>
      <width>211</width>
      <height>41</height>
     </rect>
@@ -363,7 +318,7 @@ color: black</string>
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>120</y>
+     <y>50</y>
      <width>211</width>
      <height>41</height>
     </rect>
@@ -382,17 +337,17 @@ color: black</string>
    </property>
    <item>
     <property name="text">
-     <string>Học kỳ 1</string>
+     <string>Hoc ky 1</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Học kỳ 2</string>
+     <string>Hoc ky 2</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Học kỳ hè</string>
+     <string>Hoc ky he</string>
     </property>
    </item>
   </widget>
@@ -400,9 +355,9 @@ color: black</string>
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>250</y>
+     <y>160</y>
      <width>261</width>
-     <height>371</height>
+     <height>521</height>
     </rect>
    </property>
    <property name="font">
@@ -432,7 +387,7 @@ color: black</string>
       <x>10</x>
       <y>40</y>
       <width>231</width>
-      <height>301</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="font">
@@ -449,21 +404,6 @@ color: black</string>
     <property name="horizontalScrollBarPolicy">
      <enum>Qt::ScrollBarAsNeeded</enum>
     </property>
-    <item>
-     <property name="text">
-      <string>NT219.L21.ANTT</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>NT203.ANTT</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>IT007.L21</string>
-     </property>
-    </item>
    </widget>
   </widget>
   <widget class="QTableWidget" name="tableClass">
@@ -623,7 +563,7 @@ background-color: white; border-color: red
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>680</x>
+     <x>700</x>
      <y>120</y>
      <width>81</width>
      <height>31</height>
@@ -649,7 +589,7 @@ background-color: white; border-color: red
   <widget class="QLabel" name="labelIDClass">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>790</x>
      <y>120</y>
      <width>181</width>
      <height>31</height>
@@ -666,7 +606,7 @@ background-color: white; border-color: red
 </string>
    </property>
    <property name="text">
-    <string>NT219.L21.ANTT</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -692,7 +632,7 @@ background-color: white; border-color: red
 </string>
    </property>
    <property name="text">
-    <string>Mật mã học</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -744,7 +684,7 @@ background-color: white; border-color: red
 </string>
    </property>
    <property name="text">
-    <string>70</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -779,8 +719,8 @@ background-color: white; border-color: red
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>50</y>
+     <x>970</x>
+     <y>40</y>
      <width>401</width>
      <height>51</height>
     </rect>
@@ -798,7 +738,7 @@ background-color: white; border-color: red
 </string>
    </property>
    <property name="text">
-    <string>BẢNG ĐIỂM SINH VIÊN</string>
+    <string>BẢNG ĐIỂM LỚP HỌC</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -807,8 +747,8 @@ background-color: white; border-color: red
   <widget class="QPushButton" name="buttonSave">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>640</y>
+     <x>410</x>
+     <y>720</y>
      <width>201</width>
      <height>51</height>
     </rect>
@@ -826,18 +766,15 @@ background-color: white; border-color: red
     <string>LƯU ĐIỂM</string>
    </property>
   </widget>
-  <zorder>buttonSearch</zorder>
   <zorder>lineEdit</zorder>
   <zorder>groupboxProfile</zorder>
   <zorder>buttonLogout</zorder>
   <zorder>label_3</zorder>
-  <zorder>lineSearch</zorder>
   <zorder>label</zorder>
   <zorder>selectYear</zorder>
   <zorder>selectSemester</zorder>
   <zorder>groupListClass</zorder>
   <zorder>tableClass</zorder>
-  <zorder>label_4</zorder>
   <zorder>labelIDClass</zorder>
   <zorder>labelNameSubject</zorder>
   <zorder>label_5</zorder>
@@ -845,6 +782,7 @@ background-color: white; border-color: red
   <zorder>label_7</zorder>
   <zorder>label_6</zorder>
   <zorder>buttonSave</zorder>
+  <zorder>label_4</zorder>
  </widget>
  <resources/>
  <connections/>

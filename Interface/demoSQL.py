@@ -113,13 +113,18 @@ def checkPass(conn, username, passInput):
         check(infor[7], passInput)
         print("Ban la hoc sinh!")
 
-
 if __name__ == '__main__':
 
     conn = connect(r"ECCapp.db")
     username = "19521336"
     password = "simpboiz"
     checkPass(conn,username,password)
+
+    cur.execute("""SELECT * FROM STUDENT""")
+    print(cur.fetchone())
+
+
+
     '''cur = conn.cursor()
     cur.execute("""SELECT * FROM STUDENT""")
     print(cur.fetchone()[7])'''
@@ -151,6 +156,28 @@ if __name__ == '__main__':
         insert_teacher(conn,teacher)
     except Error as e:
         print(e)
+
+        CREATE TABLE "RESULT" (
+	"StudentID"	TEXT NOT NULL,
+	"ModuleID"	TEXT NOT NULL,
+	"ProcessPoint"	REAL,
+	"MidPoint"	REAL,
+	"LabPoint"	REAL,
+	"EndPoint"	REAL,
+	"AveragePoint"	REAL,
+	"Note"	TEXT,
+	FOREIGN KEY("ModuleID") REFERENCES "MODULE"("ModuleID"),
+	FOREIGN KEY("StudentID") REFERENCES "STUDENT"("StudentID"),
+	PRIMARY KEY("StudentID","ModuleID"),
+	CHECK((AveragePoint<3 and Note='Khong dat') or (AveragePoint>=3 and Note='Dat'))
+);
+
+--SELECT ModuleID FROM MODULE WHERE TeacherID = "anv" and Semester = "Hoc ky 2" and SchoolYear = "2020-2021";
+--SELECT st.StudentID, st.Fullname, rs.ProcessPoint, rs.MidPoint, rs.LabPoint,EndPoint,rs.AveragePoint,rs.Note
+--FROM STUDENT st, RESULT rs, MODULE md
+--WHERE st.StudentID = rs.StudentID and rs.ModuleID = md.ModuleID and md.ModuleID = "NT216.L21.ANTT";
+--SELECT md.ModuleID, md.NameSubject, md.Cre
+CREATE TABLE "RESULT" (
 
     try:
         insert_module(conn,module)
