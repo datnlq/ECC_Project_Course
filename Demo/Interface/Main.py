@@ -148,7 +148,6 @@ class Teacher(qtw.QWidget):
 
         #button Log Out
         self.buttonLogout.clicked.connect(self.LogOut)
-.....,,T b
         #Button Sửa điểm
         buttonEdit = self.findChild(qtw.QPushButton, 'buttonEdit')
         buttonEdit.clicked.connect()
@@ -167,7 +166,7 @@ class Teacher(qtw.QWidget):
         self.tableClass.setColumnWidth(1, 150)
         self.tableClass.setColumnWidth(8, 110)
         self.listClass.clicked.connect(self.loadListStudent)
-    def Editscore()
+
      
     #Dùng load bảng kết quả lớp học và thông tin học phần
     def loadListStudent(self):
@@ -376,9 +375,93 @@ if __name__ == "__main__":
     except Error as e:
         print(e)
 
-    with open(file_name, "rb") as fi:
+    #-------------------------------------------------
+    #print("Decrypt Beginning!")
+
+
+    curr.execute("SELECT * FROM SERVER WHERE ID=?", (1,))
+    rs = curr.fetchone()
+    #print(rs[1])
+    C1_x = int(rs[1])
+    C1_y = int(rs[2])
+    C2_x = int(rs[3])
+    C2_y = int(rs[4])
+    AES_cipher = long_to_bytes(int(rs[7]))
+    AES_iv = long_to_bytes(int(rs[8]))
+    db.commit()
+
+    # print(C1_x)
+    # print(C1_y)
+    # print(C2_x)
+    # print(C2_y)
+    # print(Publickey_x)
+    # print(Publickey_y)
+    # print(AEScipher)
+    # print(AESiv)
+    # print(pri_key)
+    # decrypt
+
+    C1 = Point(C1_x, C1_y, curve=Curve25519)
+    C2 = Point(C2_x, C2_y, curve=Curve25519)
+
+    new_ECC_plainkey = decrypt_ecc(pri_key, C1, C2)
+
+    new_plaintext = decrypt_aes(AES_cipher, new_ECC_plainkey, AES_iv)
+
+
+
+    o = open('output.db','wb')
+    o.write(new_plaintext)
+    o.close()
+    try:
+        conn = sqlite3.connect("ECCapp.db")
+        cur = conn.cursor()
+        # print(sqlite3.version)
+    except Error as e:
+        print(e)
+
+    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('anv',))
+    th = cur.fetchone()
+    pri_key = int(th[7])
+    conn.close()
+#---------------------------------------------------------------
+
+    app = qtw.QApplication([])
+
+    stack = qtw.QStackedWidget()
+    login = LogIn()
+    stack.addWidget(login)
+    stack.setStyleSheet("background-color: white;")
+    stack.setWindowIcon(qtg.QIcon('uit.ico'))
+    stack.setWindowTitle("EEC Application")
+    stack.move(50, 50)
+    stack.show()
+    app.exec_()
+
+#------------------------------------------------
+
+
+    try:
+        conn = sqlite3.connect("ECCapp.db")
+        cur = conn.cursor()
+        # print(sqlite3.version)
+    except Error as e:
+        print(e)
+    sql = ''' UPDATE TEACHER
+              SET PrivateKey = ? 
+              WHERE TeacherID = ?
+              '''
+    teacher = (str(pri_key),'anv')
+    cur = conn.cursor()
+    cur.execute(sql,teacher)
+    conn.commit()
+    conn.close()
+
+    with open("output.db", "rb") as fi:
         text = fi.read()
     text = padding(text)
+
+    
     #aes encrypt 
 
     AES_cipher , AES_key, AES_iv = encrypt_aes(text)
@@ -419,85 +502,8 @@ if __name__ == "__main__":
     curr = db.cursor()
     curr.execute(sql, server_update)
     db.commit()
-    try:
-        conn = sqlite3.connect("ECCapp.db")
-        cur = conn.cursor()
-        # print(sqlite3.version)
-    except Error as e:
-        print(e)
-    sql = ''' UPDATE TEACHER
-              SET PrivateKey = ? 
-              WHERE TeacherID = ?
-              '''
-    teacher = (str(pri_key),'anv')
-    cur = conn.cursor()
-    cur.execute(sql,teacher)
-    conn.commit()
-    conn.close()
+    
 
 
 
     #print("Encrypt done ! ")
-
-
-#------------------------------------------------
-    app = qtw.QApplication([])
-
-    stack = qtw.QStackedWidget()
-    login = LogIn()
-    stack.addWidget(login)
-    stack.setStyleSheet("background-color: white;")
-    stack.setWindowIcon(qtg.QIcon('uit.ico'))
-    stack.setWindowTitle("EEC Application")
-    stack.move(50, 50)
-    stack.show()
-    app.exec_()
-
-#-------------------------------------------------
-    #print("Decrypt Beginning!")
-
-
-    curr.execute("SELECT * FROM SERVER WHERE ID=?", (1,))
-    rs = curr.fetchone()
-    #print(rs[1])
-    C1_x = int(rs[1])
-    C1_y = int(rs[2])
-    C2_x = int(rs[3])
-    C2_y = int(rs[4])
-    AES_cipher = long_to_bytes(int(rs[7]))
-    AES_iv = long_to_bytes(int(rs[8]))
-    db.commit()
-    try:
-        conn = sqlite3.connect("ECCapp.db")
-        cur = conn.cursor()
-        # print(sqlite3.version)
-    except Error as e:
-        print(e)
-
-    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('anv',))
-    th = cur.fetchone()
-    pri_key = int(th[7])
-
-    # print(C1_x)
-    # print(C1_y)
-    # print(C2_x)
-    # print(C2_y)
-    # print(Publickey_x)
-    # print(Publickey_y)
-    # print(AEScipher)
-    # print(AESiv)
-    # print(pri_key)
-    # decrypt
-
-    C1 = Point(C1_x, C1_y, curve=Curve25519)
-    C2 = Point(C2_x, C2_y, curve=Curve25519)
-
-    new_ECC_plainkey = decrypt_ecc(pri_key, C1, C2)
-
-    new_plaintext = decrypt_aes(AES_cipher, new_ECC_plainkey, AES_iv)
-
-
-
-    o = open('output.db','wb')
-    o.write(new_plaintext)
-    o.close()
