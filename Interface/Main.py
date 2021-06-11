@@ -89,12 +89,11 @@ class Server():
                 return 2
             else:
                 return 0
+
+    def updateResult(self, ProcessPoint, MidPoint, LabPoint, EndPoint, AveragePoint, Note, StudentID, ModuleID):
+        self.cur.execute("""UPDATE RESULT SET ProcessPoint = ?, MidPoint = ?, LabPoint = ?, EndPoint = ?, AveragePoint = ?, Note = ? WHERE StudentID = ? and ModuleID = ?""", (ProcessPoint,MidPoint, LabPoint, EndPoint, AveragePoint, Note,StudentID,ModuleID,))
+        self.conn.commit()
 #endregion Database Server
-
-
-class ReadOnlyDelegate(qtw.QStyledItemDelegate):
-    def createEditor(self, parent, option, index):
-        return
 
 
 #region LogIn form
@@ -139,8 +138,7 @@ class Teacher(qtw.QWidget):
         self.buttonLogout.clicked.connect(self.LogOut)
 
         #Button Sửa điểm
-        buttonEdit = self.findChild(qtw.QPushButton, 'buttonEdit')
-
+        self.buttonSave.clicked.connect(self.readTableData)
         #Load Profile
         self.loadProfile()
 
@@ -208,7 +206,7 @@ class Teacher(qtw.QWidget):
         self.labelPhone.setText(profile[4])
         self.labelMail.setText(profile[5])
 
-    #Dùng loas danh sách lớp học
+    #Dùng load danh sách lớp học
     def loadSubjectList(self):
         self.listClass.clear()
         subjectList = self.server.selectSubjectList(self.TeacherID, self.selectSemester.currentText(), self.selectYear.currentText())
@@ -216,6 +214,22 @@ class Teacher(qtw.QWidget):
         if(subjectList != []):
             for i in range(len(subjectList)):
                 self.listClass.insertItem(i, subjectList[i][0])
+
+    #Dùng upload chỉnh sửa lên server
+    def readTableData(self):
+        rowCount = self.tableClass.rowCount()
+        columnCount = self.tableClass.columnCount()
+        if rowCount != 0 and columnCount != 0:
+            for row in range(rowCount):
+                rowData = []
+                for column in range(columnCount):
+                    item = self.tableClass.item(row, column)
+                    if (item and item.text()):
+                        rowData.append(item.text())
+                    else:
+                        rowData.append('NULL')
+                self.server.updateResult(rowData[3], rowData[4], rowData[5], rowData[6], rowData[7], rowData[8], rowData[0], self.listClass.currentItem().text())
+            
 #endregion Teacher Form
 
 
