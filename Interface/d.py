@@ -7,6 +7,7 @@ from sqlite3 import Error
 import hashlib as h
 import sys
 
+#region Database Server
 class Server():
     def __init__(self):
         super().__init__()
@@ -17,26 +18,40 @@ class Server():
         except Error as e:
             print(e)
 
+    #Dùng cho StudentForm
+    #selectStudent truy vấn Profile
+    #studentResult truy vấn thông tin kết quả học tập theo kỳ và năm học
     def selectStudent(self, username):
         self.cur.execute("SELECT * FROM STUDENT WHERE StudentID=?", (username,))
 
-        row = self.cur.fetchone()
-        return row
+        self.row = self.cur.fetchone()
+        return self.row
 
     def studentResult(self, username, semester, schoolyear):
         self.cur.execute("SELECT md.ModuleID, md.NameSubject, md.NumCredit, rs.ProcessPoint, rs.MidPoint, rs.LabPoint, rs.EndPoint, rs.AveragePoint, rs.Note FROM MODULE md, RESULT rs WHERE md.ModuleID = rs.ModuleID and rs.StudentID = ? and md.Semester = ? and md.SchoolYear = ?", (username, semester, schoolyear,))
         self.row = self.cur.fetchall()
         return self.row
 
+    #Dùng cho TeacherForm
+    #selectTeacher truy vấn Profile
+    #selectSubjectList truy vấn danh sách lớp giáo viên dạy dựa theo kỳ và năm học
+    #selectSubject truy vấn thông tin học phần theo ModuleID 
+    #selectListStudent truy vấn danh sách học sinh và điểm 
     def selectTeacher(self, username):
         self.cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", (username,))
         self.row = self.cur.fetchone()
         return self.row
 
     def selectSubjectList(self, username, semester, schoolyear):
-        self.cur.execute("SELECT ModuleID, NameSubject, NumStudent FROM MODULE WHERE TeacherID = ? and Semester = ? and SchoolYear = ?", (username, semester, schoolyear,))
+        self.cur.execute("SELECT ModuleID FROM MODULE WHERE TeacherID = ? and Semester = ? and SchoolYear = ?", (username, semester, schoolyear,))
 
         self.row = self.cur.fetchall()
+        return self.row
+
+    def selectSubject(self, ModuleID):
+        self.cur.execute("SELECT ModuleID, NameSubject, NumStudent FROM MODULE WHERE ModuleID = ?", (ModuleID,))
+
+        self.row = self.cur.fetchone()
         return self.row
 
     def selectListStudent(self, nameModule):
@@ -45,6 +60,7 @@ class Server():
         self.row = self.cur.fetchall()
         return self.row
 
+    #Hai method này dùng để checkpass
     def checkSign(self, passCheck, passInput):
         print(passInput)
         hash_passInput = h.sha1(bytes(passInput, 'utf-8')).hexdigest()
@@ -73,85 +89,15 @@ class Server():
                 return 2
             else:
                 return 0
-#endregion Database Server
 
-class Student(qtw.QWidget):
-    def __init__(self, StudentID):
-        super().__init__()
-        self.StudentID = StudentID
-        self.server = Server()
-        #Load giao diện lên
-        uic.loadUi("student.ui", self)
+    def updateResult(self, ProcessPoint, MidPoint, LabPoint, EndPoint, AveragePoint, Note, StudentID, ModuleID):
+        self.cur.execute("""UPDATE RESULT SET ProcessPoint = ?, MidPoint = ?, LabPoint = ?, EndPoint = ?, AveragePoint = ?, Note = ? WHERE StudentID = ? and ModuleID = ?""", (ProcessPoint,MidPoint, LabPoint, EndPoint, AveragePoint, Note,StudentID,ModuleID,))
+        self.conn.commit()
+    def view(self):
+        self.cur.execute("""SELECT*FROM RESULT WHERE StudentID = '19522307'""")
+        [print(row) for row in self.cur.fetchall()]
 
-        self.loadProfile()
-
-        #button Log Out
-        #self.buttonLogout.clicked.connect(self.LogOut)
-
-        #button Xem kết quả
-        self.buttonResult.clicked.connect(self.loadResult)
-
-        #Set up lại cái table, tại nó khó sửa trên giao diện quá
-        self.tableResult.setColumnWidth(0, 160)
-        self.tableResult.setColumnWidth(1, 150)
-        self.tableResult.setColumnWidth(8, 110)
-        print(self.selectSemester.currentText()+self.selectYear.currentText())
-        '''delegate = ReadOnlyDelegate(self)
-        for i in range (tableResult.columnCount()):
-            tableResult.setItemDelegateForColumn(i, delegate)'''
-
-
-    def loadResult(self):
-        result = self.server.studentResult(self.StudentID, self.selectSemester.currentText(), self.selectYear.currentText())
-        self.loadTableResult(result)
-        
-
-
-    def loadTableResult(self, listModule):
-        row = 0
-        sumCredit = 0 
-        sumPoint = 0
-        self.tableResult.setRowCount(len(listModule))
-        if (len(listModule) != 0):
-            for i in range(len(listModule)):  
-                sumCredit +=  listModule[i][2]
-                sumPoint += listModule[i][7]
-                self.tableResult.setItem(row, 0, qtw.QTableWidgetItem(listModule[i][0]))
-                self.tableResult.setItem(row, 1, qtw.QTableWidgetItem(listModule[i][1]))
-                self.tableResult.setItem(row, 2, qtw.QTableWidgetItem(str(listModule[i][2])))
-                self.tableResult.setItem(row, 3, qtw.QTableWidgetItem(str(listModule[i][3])))
-                self.tableResult.setItem(row, 4, qtw.QTableWidgetItem(str(listModule[i][4])))
-                self.tableResult.setItem(row, 5, qtw.QTableWidgetItem(str(listModule[i][5])))
-                self.tableResult.setItem(row, 6, qtw.QTableWidgetItem(str(listModule[i][6])))
-                self.tableResult.setItem(row, 7, qtw.QTableWidgetItem(str(listModule[i][7])))
-                self.tableResult.setItem(row, 8, qtw.QTableWidgetItem(listModule[i][8]))
-                row = row + 1
-            self.labelNumberCredit.setText(str(sumCredit))
-            averageSemester = sumPoint/len(listModule)
-            self.labelAveragePoint.setText(str(averageSemester))
-            if (averageSemester < 5):
-                self.labelClassify = "Yeu"
-            elif (averageSemester >= 5 and averageSemester < 8):
-                self.labelClassify = "Kha"
-            elif (averageSemester >= 8 and averageSemester < 9):
-                self.labelClassify = "Gioi"
-            else:
-                self.labelClassify = "Xuat sac"
-
-    def loadProfile(self):
-        #Load Profile
-        profile = self.server.selectStudent(self.StudentID)
-        self.labelIDStudent.setText(profile[0])
-        self.labelName.setText(profile[1])
-        self.labelSex.setText(profile[2])
-        self.labelYear.setText(profile[3])
-        self.labelFaculty.setText(profile[4])
-        self.labelPhone.setText(profile[5])
-        self.labelMail.setText(profile[6])
-
-    
-app = qtw.QApplication([])
-
-a = Student("19521336")
-a.show()
-app.exec_()
+server = Server()
+update = (9, 9, 9, 9,'Dat','19522307','NT216.L21.ANTT')
+server.updateResult(9,9,9,9,9, 'Dat','19522307', 'IT007.L21', )
+server.view()
