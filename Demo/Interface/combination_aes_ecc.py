@@ -148,7 +148,7 @@ if __name__ == "__main__":
               SET PrivateKey = ? 
               WHERE TeacherID = ?
               '''
-    teacher = (str(pri_key),'dnv')
+    teacher = (str(pri_key),'anv')
     cur = conn.cursor()
     cur.execute(sql,teacher)
     conn.commit()
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     AES_cipher = long_to_bytes(int(rs[7]))
     AES_iv = long_to_bytes(int(rs[8]))
     db.commit()
-    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('dnv',))
+    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('anv',))
     th = cur.fetchone()
     pri_key = th[6]
 

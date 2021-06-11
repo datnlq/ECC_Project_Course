@@ -376,7 +376,7 @@ if __name__ == "__main__":
         print(e)
 
     #-------------------------------------------------
-    #print("Decrypt Beginning!")
+    # print("Decrypt Beginning!")
 
 
     curr.execute("SELECT * FROM SERVER WHERE ID=?", (1,))
@@ -400,6 +400,20 @@ if __name__ == "__main__":
     # print(AESiv)
     # print(pri_key)
     # decrypt
+    try:
+        conn = sqlite3.connect("ECCapp.db")
+        cur = conn.cursor()
+        # print(sqlite3.version)
+    except Error as e:
+        print(e)
+
+
+    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('anv',))
+    th = cur.fetchone()
+    pri_key = int(th[7])
+    print(pri_key)
+    conn.close()
+
 
     C1 = Point(C1_x, C1_y, curve=Curve25519)
     C2 = Point(C2_x, C2_y, curve=Curve25519)
@@ -408,37 +422,29 @@ if __name__ == "__main__":
 
     new_plaintext = decrypt_aes(AES_cipher, new_ECC_plainkey, AES_iv)
 
+    
 
-
-    o = open('output.db','wb')
+    o = open('ECCapp.db','wb')
     o.write(new_plaintext)
     o.close()
-    try:
-        conn = sqlite3.connect("ECCapp.db")
-        cur = conn.cursor()
-        # print(sqlite3.version)
-    except Error as e:
-        print(e)
+    
 
-    cur.execute("SELECT * FROM TEACHER WHERE TeacherID=?", ('anv',))
-    th = cur.fetchone()
-    pri_key = int(th[7])
-    conn.close()
+    
 #---------------------------------------------------------------
 
-    app = qtw.QApplication([])
+#     app = qtw.QApplication([])
 
-    stack = qtw.QStackedWidget()
-    login = LogIn()
-    stack.addWidget(login)
-    stack.setStyleSheet("background-color: white;")
-    stack.setWindowIcon(qtg.QIcon('uit.ico'))
-    stack.setWindowTitle("EEC Application")
-    stack.move(50, 50)
-    stack.show()
-    app.exec_()
+#     stack = qtw.QStackedWidget()
+#     login = LogIn()
+#     stack.addWidget(login)
+#     stack.setStyleSheet("background-color: white;")
+#     stack.setWindowIcon(qtg.QIcon('uit.ico'))
+#     stack.setWindowTitle("EEC Application")
+#     stack.move(50, 50)
+#     stack.show()
+#     app.exec_()
 
-#------------------------------------------------
+# #------------------------------------------------
 
 
     try:
@@ -455,55 +461,55 @@ if __name__ == "__main__":
     cur = conn.cursor()
     cur.execute(sql,teacher)
     conn.commit()
-    conn.close()
-
-    with open("output.db", "rb") as fi:
-        text = fi.read()
-    text = padding(text)
-
-    
-    #aes encrypt 
-
-    AES_cipher , AES_key, AES_iv = encrypt_aes(text)
-
-    #ecc encrypt aes's key
-
-    pri_key, pub_key, C1, C2 = encrypt_ecc(AES_key)
-
-
-    C1_x,C1_y = Pointtrans(str(C1))
-    C2_x,C2_y = Pointtrans(str(C2))
-    Publickey_x,Publickey_y = Pointtrans(str(pub_key))
-    AEScipher = bytes_to_long(AES_cipher)
-    AESiv = bytes_to_long(AES_iv)
-
-    print(pri_key)
-    # print(C1_x)
-    # print(C1_y)
-    # print(C2_x)
-    # print(C2_y)
-    # print(Publickey_x)
-    # print(Publickey_y)
-    # print(AEScipher)
-    # print(AESiv)
-    server_update = (C1_x,C1_y,C2_x,C2_y,Publickey_x,Publickey_y,str(AEScipher),str(AESiv),1)
-
-    sql = ''' UPDATE SERVER
-              SET C1_x = ? ,
-                  C1_y = ? ,
-                  C2_x = ? ,
-                  C2_y = ? ,
-                  Publickey_x = ? ,
-                  Publickey_y = ? ,
-                  AES_cipher = ? ,
-                  AES_iv = ?
-              WHERE ID = ?
-        '''
-    curr = db.cursor()
-    curr.execute(sql, server_update)
-    db.commit()
     
 
+#     with open("ECCapp.db", "rb") as fi:
+#         text = fi.read()
+#     text = padding(text)
 
 
-    #print("Encrypt done ! ")
+#     #aes encrypt 
+
+#     AES_cipher , AES_key, AES_iv = encrypt_aes(text)
+
+#     #ecc encrypt aes's key
+
+#     pri_key, pub_key, C1, C2 = encrypt_ecc(AES_key)
+
+
+#     C1_x,C1_y = Pointtrans(str(C1))
+#     C2_x,C2_y = Pointtrans(str(C2))
+#     Publickey_x,Publickey_y = Pointtrans(str(pub_key))
+#     AEScipher = bytes_to_long(AES_cipher)
+#     AESiv = bytes_to_long(AES_iv)
+
+#     print(pri_key)
+#     # print(C1_x)
+#     # print(C1_y)
+#     # print(C2_x)
+#     # print(C2_y)
+#     # print(Publickey_x)
+#     # print(Publickey_y)
+#     # print(AEScipher)
+#     # print(AESiv)
+#     server_update = (C1_x,C1_y,C2_x,C2_y,Publickey_x,Publickey_y,str(AEScipher),str(AESiv),1)
+
+#     sql = ''' UPDATE SERVER
+#               SET C1_x = ? ,
+#                   C1_y = ? ,
+#                   C2_x = ? ,
+#                   C2_y = ? ,
+#                   Publickey_x = ? ,
+#                   Publickey_y = ? ,
+#                   AES_cipher = ? ,
+#                   AES_iv = ?
+#               WHERE ID = ?
+#         '''
+#     curr = db.cursor()
+#     curr.execute(sql, server_update)
+#     db.commit()
+    
+
+
+
+    # #print("Encrypt done ! ")
